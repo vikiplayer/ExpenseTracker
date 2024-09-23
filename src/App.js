@@ -1,18 +1,17 @@
 import "./App.css";
-import Card from "./components/UI/Card";
 import Expenses from "./components/Expense/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
 
 function App() {
   return (
-    <Card>
-      <Card>
+    <div>
+      <div>
         <NewExpense/>  
-      </Card>
-      <Card>
+      </div>
+      <div>
         <Expenses/>  
-      </Card>
-    </Card>
+      </div>
+    </div>
   )
 }
 

@@ -1,27 +1,49 @@
-import React from "react";
+import React,{useState} from "react";
 import './ExpenseForm.css';
 
 function ExpenseForm() {
+    const [enteredTitle,setEnteredTitle] = useState('')
+    const [enteredDate,setEnteredDate] = useState('')
+    const [enteredAmount,setEnteredAmount] = useState('')
+    function titleChanger(event) {
+      setEnteredTitle(event.target.value);        
+    }
+    function dateChanger(event) {
+      setEnteredDate(event.target.value);        
+    }
+    function amountChanger(event) {
+      setEnteredAmount(event.target.value);        
+    }
+
+    function submitHandler(event) {
+        event.preventDefault();
+        const ExpenseData = {
+            title: enteredTitle,
+            date: new Date(enteredDate),
+            amount: enteredAmount
+        }   
+        console.log(ExpenseData);             
+    }
     return (
-        <form>
+        <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label>
                         Title
                     </label>
-                    <input type="text"/>
+                    <input type="text" onChange={titleChanger}/>
                 </div>
                 <div className="new-expense__control">
                     <label>
                         Amount
                     </label>
-                    <input type="number" min='0.1' step='0.01'  />
+                    <input type="number" min='0.1' step='0.01' onChange={amountChanger}  />
                 </div>
                 <div className="new-expense__control">
                     <label>
                         Date
                     </label>
-                    <input type="date" min='2019-01-01' max='2022-12-31'  />
+                    <input type="date" min='2019-01-01' max='2022-12-31' onChange={dateChanger}  />
                 </div>
                 <div className=".new-expense__actions">
                     <button type="submit">

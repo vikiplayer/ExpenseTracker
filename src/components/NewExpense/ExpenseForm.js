@@ -1,7 +1,7 @@
 import React,{useState} from "react";
 import './ExpenseForm.css';
 
-function ExpenseForm() {
+function ExpenseForm(props) {
     const [enteredTitle,setEnteredTitle] = useState('')
     const [enteredDate,setEnteredDate] = useState('')
     const [enteredAmount,setEnteredAmount] = useState('')
@@ -22,7 +22,10 @@ function ExpenseForm() {
             date: new Date(enteredDate),
             amount: enteredAmount
         }   
-        console.log(ExpenseData);             
+        props.onSaveExpenseData(ExpenseData);
+        setEnteredTitle('');
+        setEnteredAmount('');
+        setEnteredDate('');
     }
     return (
         <form onSubmit={submitHandler}>
@@ -31,19 +34,35 @@ function ExpenseForm() {
                     <label>
                         Title
                     </label>
-                    <input type="text" onChange={titleChanger}/>
+                    <input
+                     type="text"
+                     value={enteredTitle}
+                     onChange={titleChanger}
+                    />
                 </div>
                 <div className="new-expense__control">
                     <label>
                         Amount
                     </label>
-                    <input type="number" min='0.1' step='0.01' onChange={amountChanger}  />
+                    <input
+                     type="number"
+                     min='0.1'
+                     step='0.01'
+                     value={enteredAmount}
+                     onChange={amountChanger}
+                    />
                 </div>
                 <div className="new-expense__control">
                     <label>
                         Date
                     </label>
-                    <input type="date" min='2019-01-01' max='2022-12-31' onChange={dateChanger}  />
+                    <input
+                     type="date"
+                     min='2019-01-01'
+                     max='2022-12-31'
+                     value={enteredDate}
+                     onChange={dateChanger}
+                    />
                 </div>
                 <div className=".new-expense__actions">
                     <button type="submit">
